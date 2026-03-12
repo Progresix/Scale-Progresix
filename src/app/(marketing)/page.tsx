@@ -3,7 +3,7 @@
 import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, Package, Twitter, Instagram, Linkedin } from "lucide-react";
+import { Search, Package, MessageCircle, Mail } from "lucide-react";
 import { Navbar } from "@/components/shared/navbar";
 import { BackToTop } from "@/components/shared/back-to-top";
 import { Card, CardContent } from "@/components/ui/card";
@@ -302,28 +302,25 @@ export default function MarketingPage() {
                 </p>
               </div>
 
-              {/* Social Links */}
+              {/* Contact Links - WhatsApp & Email */}
               <div className="flex items-center gap-4">
                 <a
-                  href="#"
-                  className="w-10 h-10 rounded-full bg-gray-100 dark:bg-zinc-700 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:text-white dark:hover:text-white hover:bg-zinc-800 dark:hover:bg-zinc-600 transition-colors"
-                  aria-label="Twitter"
+                  href="https://wa.me/62882008726475"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-green-500 hover:bg-green-600 text-white transition-colors"
+                  aria-label="WhatsApp"
                 >
-                  <Twitter className="h-5 w-5" />
+                  <MessageCircle className="h-5 w-5" />
+                  <span className="text-sm font-medium">WhatsApp</span>
                 </a>
                 <a
-                  href="#"
-                  className="w-10 h-10 rounded-full bg-gray-100 dark:bg-zinc-700 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:text-white dark:hover:text-white hover:bg-zinc-800 dark:hover:bg-zinc-600 transition-colors"
-                  aria-label="Instagram"
+                  href="mailto:progresix@outlook.co.id"
+                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-700 dark:bg-zinc-600 hover:bg-zinc-800 dark:hover:bg-zinc-500 text-white transition-colors"
+                  aria-label="Email"
                 >
-                  <Instagram className="h-5 w-5" />
-                </a>
-                <a
-                  href="#"
-                  className="w-10 h-10 rounded-full bg-gray-100 dark:bg-zinc-700 flex items-center justify-center text-gray-500 dark:text-gray-400 hover:text-white dark:hover:text-white hover:bg-zinc-800 dark:hover:bg-zinc-600 transition-colors"
-                  aria-label="LinkedIn"
-                >
-                  <Linkedin className="h-5 w-5" />
+                  <Mail className="h-5 w-5" />
+                  <span className="text-sm font-medium">Email</span>
                 </a>
               </div>
             </div>
