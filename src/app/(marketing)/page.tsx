@@ -26,7 +26,7 @@ const products = [
     slug: "website-template-pro",
     description: "Template website modern dengan desain profesional untuk bisnis Anda",
     price: 299000,
-    image_url: null,
+    image_url: "https://images.unsplash.com/photo-1460925895917-aaf4b51bada8?w=800&h=600&fit=crop",
     is_active: true,
   },
   {
@@ -35,7 +35,7 @@ const products = [
     slug: "ebook-marketing-digital",
     description: "Panduan lengkap marketing digital untuk pemula dan profesional",
     price: 99000,
-    image_url: null,
+    image_url: "https://images.unsplash.com/photo-150784272343-583f20270319?w=800&h=600&fit=crop",
     is_active: true,
   },
   {
@@ -44,7 +44,7 @@ const products = [
     slug: "ui-kit-premium",
     description: "Koleksi komponen UI siap pakai untuk project Anda",
     price: 199000,
-    image_url: null,
+    image_url: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=600&fit=crop",
     is_active: true,
   },
   {
@@ -53,7 +53,7 @@ const products = [
     slug: "source-code-ecommerce",
     description: "Source code lengkap website e-commerce siap deploy",
     price: 499000,
-    image_url: null,
+    image_url: "https://images.unsplash.com/photo-1633356122544-f134ef2944f0?w=800&h=600&fit=crop",
     is_active: true,
   },
   {
@@ -62,7 +62,7 @@ const products = [
     slug: "dashboard-admin-template",
     description: "Template dashboard admin dengan fitur lengkap dan responsif",
     price: 349000,
-    image_url: null,
+    image_url: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop",
     is_active: true,
   },
   {
@@ -71,7 +71,7 @@ const products = [
     slug: "landing-page-kit",
     description: "Koleksi landing page siap pakai untuk berbagai kebutuhan bisnis",
     price: 179000,
-    image_url: null,
+    image_url: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop",
     is_active: true,
   },
 ];
@@ -91,24 +91,24 @@ function AnimatedBanner() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % bannerMessages.length);
-    }, 3000);
+    }, 4000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="bg-zinc-800 dark:bg-zinc-900 border-b border-gray-700 dark:border-gray-700 py-3 overflow-hidden">
+    <div className="bg-gradient-to-r from-zinc-800 to-zinc-700 dark:from-zinc-900 dark:to-zinc-800 border-b border-gray-700 dark:border-gray-700 py-4 overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-center h-6">
           <AnimatePresence mode="wait">
             <motion.span
               key={currentIndex}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
-              className="text-sm font-medium text-gray-300 dark:text-gray-400"
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.5, ease: "easeInOut" }}
+              className="text-sm font-semibold text-white dark:text-gray-200 text-center"
             >
-              {bannerMessages[currentIndex]}
+              ✨ {bannerMessages[currentIndex]}
             </motion.span>
           </AnimatePresence>
         </div>
@@ -126,16 +126,21 @@ function SearchBar({
   setSearchQuery: (query: string) => void;
 }) {
   return (
-    <div className="relative max-w-md mx-auto mb-12">
-      <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400 dark:text-gray-500" />
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: 0.2 }}
+      className="relative max-w-md mx-auto mb-12"
+    >
+      <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500 dark:text-gray-400 pointer-events-none" />
       <Input
         type="text"
         placeholder="Cari produk..."
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
-        className="pl-12 pr-4 py-6 rounded-full border-gray-700 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:border-gray-500 focus:ring-gray-500"
+        className="pl-12 pr-4 py-3 rounded-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:border-zinc-500 dark:focus:border-gray-600 focus:ring-2 focus:ring-zinc-200 dark:focus:ring-zinc-800 transition-all duration-200"
       />
-    </div>
+    </motion.div>
   );
 }
 
@@ -152,14 +157,15 @@ function ProductCard({
       whileHover={{ y: -4 }}
       transition={{ duration: 0.2 }}
     >
-      <Card className="group overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-500 transition-colors h-full flex flex-col bg-white dark:bg-zinc-900">
+      <Card className="group overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-all duration-300 h-full flex flex-col bg-white dark:bg-zinc-900 shadow-sm hover:shadow-md">
         {/* Image Section */}
         <div className="relative aspect-video overflow-hidden bg-gray-100 dark:bg-zinc-800">
           {product.image_url ? (
             <img
               src={product.image_url}
               alt={product.name}
-              className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-300"
+              className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-300"
+              crossOrigin="anonymous"
             />
           ) : (
             <div className="flex items-center justify-center h-full">
@@ -168,9 +174,9 @@ function ProductCard({
           )}
 
           {/* Overlay on hover */}
-          <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+          <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
             <Link href={`/products/${product.slug}`}>
-              <Button variant="secondary" size="sm" className="gap-2">
+              <Button variant="secondary" size="sm" className="gap-2 bg-white hover:bg-gray-100 text-black">
                 Lihat Detail
               </Button>
             </Link>
@@ -180,7 +186,7 @@ function ProductCard({
         {/* Content Section */}
         <CardContent className="p-4 flex flex-col flex-1">
           {/* Product Name */}
-          <h3 className="font-semibold text-zinc-900 dark:text-white line-clamp-2 mb-2">
+          <h3 className="font-semibold text-zinc-900 dark:text-white line-clamp-2 mb-2 text-base">
             {product.name}
           </h3>
 
@@ -190,7 +196,7 @@ function ProductCard({
           </p>
 
           {/* Price and Action */}
-          <div className="flex items-center justify-between mt-auto pt-2 border-t border-gray-100 dark:border-gray-700">
+          <div className="flex items-center justify-between mt-auto pt-4 border-t border-gray-200 dark:border-gray-700">
             <span className="text-lg font-bold text-zinc-900 dark:text-white">
               Rp {formatPrice(product.price).replace("IDR", "").trim()}
             </span>
@@ -225,37 +231,53 @@ export default function MarketingPage() {
   }, [searchQuery]);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50 dark:bg-zinc-950">
+    <div className="min-h-screen flex flex-col bg-white dark:bg-zinc-950">
       <Navbar />
 
       {/* Animated Banner */}
       <AnimatedBanner />
 
       {/* Hero Section */}
-      <section className="py-16 px-4 bg-gradient-to-b from-gray-100 to-gray-50 dark:from-zinc-900 dark:to-zinc-800">
+      <section className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white dark:from-zinc-900 dark:to-zinc-950">
         <div className="container mx-auto text-center max-w-4xl">
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-4xl md:text-5xl font-bold mb-4 leading-tight text-zinc-900 dark:text-white"
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="text-5xl md:text-6xl font-bold mb-6 leading-tight bg-gradient-to-r from-zinc-900 to-zinc-700 dark:from-white dark:to-gray-300 bg-clip-text text-transparent text-balance"
           >
-            Toko Produk Digital
+            Toko Produk Digital Terpercaya
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-lg text-gray-600 dark:text-gray-400 mb-8 max-w-2xl mx-auto"
+            transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+            className="text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed text-pretty"
           >
-            Scale Progresix menyediakan berbagai produk digital premium dengan harga terjangkau
+            Dapatkan ribuan produk digital berkualitas dengan harga terjangkau. Download langsung tanpa registrasi.
           </motion.p>
         </div>
       </section>
 
       {/* Products Section */}
-      <section id="products" className="py-12 px-4 flex-1 bg-white dark:bg-zinc-900">
+      <section id="products" className="py-20 px-4 flex-1 bg-white dark:bg-zinc-950">
         <div className="container mx-auto">
+          {/* Section Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="mb-12 text-center"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-2 text-balance">
+              Produk Pilihan Kami
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400 text-sm md:text-base">
+              Jelajahi koleksi produk digital terbaik untuk kebutuhan Anda
+            </p>
+          </motion.div>
+
           {/* Search Bar */}
           <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
@@ -274,53 +296,57 @@ export default function MarketingPage() {
               ))}
             </div>
           ) : (
-            <div className="text-center py-12">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="text-center py-16"
+            >
               <Package className="h-16 w-16 text-gray-400 dark:text-gray-600 mx-auto mb-4" />
-              <p className="text-gray-600 dark:text-gray-400 text-lg">
+              <p className="text-gray-700 dark:text-gray-300 text-lg font-medium">
                 Produk tidak ditemukan
               </p>
-              <p className="text-gray-400 dark:text-gray-600 text-sm mt-2">
-                Coba kata kunci lain
+              <p className="text-gray-500 dark:text-gray-500 text-sm mt-2">
+                Coba kata kunci pencarian lain
               </p>
-            </div>
+            </motion.div>
           )}
         </div>
       </section>
 
       {/* Footer - Card-like Minimalistic */}
-      <footer className="bg-gray-100 dark:bg-zinc-800 border-t border-gray-200 dark:border-gray-700 py-8 px-4 mt-auto">
+      <footer className="bg-gray-100 dark:bg-zinc-900 border-t border-gray-300 dark:border-gray-700 py-8 px-4 mt-auto">
         <div className="container mx-auto max-w-4xl">
-          <div className="bg-white dark:bg-zinc-900/50 rounded-xl border border-gray-200 dark:border-gray-700 p-6 shadow-sm">
+          <div className="bg-white dark:bg-zinc-800 rounded-lg border border-gray-200 dark:border-gray-700 p-6 shadow-sm hover:shadow-md transition-shadow duration-300">
             <div className="flex flex-col md:flex-row justify-between items-center gap-6">
               {/* Copyright */}
               <div className="text-center md:text-left">
-                <p className="text-zinc-900 dark:text-white font-semibold mb-1">
+                <p className="text-zinc-900 dark:text-white font-semibold mb-1 text-sm">
                   Scale Progresix
                 </p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  © 2024 All rights reserved.
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  © 2026 Semua hak dilindungi.
                 </p>
               </div>
 
               {/* Contact Links - WhatsApp & Email */}
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-3 flex-wrap justify-center md:justify-end">
                 <a
                   href="https://wa.me/62882008726475"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-green-500 hover:bg-green-600 text-white transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-green-500 hover:bg-green-600 text-white transition-all duration-200 hover:shadow-md text-sm font-medium"
                   aria-label="WhatsApp"
                 >
-                  <MessageCircle className="h-5 w-5" />
-                  <span className="text-sm font-medium">WhatsApp</span>
+                  <MessageCircle className="h-4 w-4" />
+                  <span className="hidden sm:inline">WhatsApp</span>
                 </a>
                 <a
                   href="mailto:progresix@outlook.co.id"
-                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-700 dark:bg-zinc-600 hover:bg-zinc-800 dark:hover:bg-zinc-500 text-white transition-colors"
+                  className="flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-700 dark:bg-zinc-700 hover:bg-zinc-800 dark:hover:bg-zinc-600 text-white transition-all duration-200 hover:shadow-md text-sm font-medium"
                   aria-label="Email"
                 >
-                  <Mail className="h-5 w-5" />
-                  <span className="text-sm font-medium">Email</span>
+                  <Mail className="h-4 w-4" />
+                  <span className="hidden sm:inline">Email</span>
                 </a>
               </div>
             </div>
